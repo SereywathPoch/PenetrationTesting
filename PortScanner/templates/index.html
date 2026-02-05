@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ profile.name }} | Cybersecurity Profile</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>{{ profile.name }}</h1>
+    <h2>{{ profile.role }}</h2>
+
+    <section>
+        <h3>About Me</h3>
+        <p>{{ profile.goal }}</p>
+    </section>
+
+    <section>
+        <h3>Skills</h3>
+        <ul>
+            {% for skill in profile.skills %}
+                <li>{{ skill }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section>
+        <h3>Interests</h3>
+        <ul>
+            {% for interest in profile.interests %}
+                <li>{{ interest }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <footer>
+        <p>© 2026 {{ profile.name }} | Cybersecurity Learning Project</p>
+    </footer>
+</div>
+
+</body>
+</html>
