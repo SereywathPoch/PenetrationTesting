@@ -11,7 +11,7 @@ process.stdin.once("data", (data) => {
 
   dns.lookup(url, (err, address) => {
     if (err) {
-      console.log("❌ Could not resolve the domain");
+      console.log("Could not resolve the domain");
     } else {
       console.log(`IP Address of ${url}: ${address}`);
     }
