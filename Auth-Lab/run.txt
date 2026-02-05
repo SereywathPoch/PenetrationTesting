@@ -1,0 +1,5 @@
+How to run: 
+1. Run Database.py
+2. Run Server.py
+3. Visit http://127.0.0.1:5000/vulnerable (Enter Username and Enter ' OR '1'='1 in the Password Textbox)
+4. Visit http://127.0.0.1:5000/secure (Enter Username and Enter ' OR '1'='1 in the Password Textbox)
