@@ -14,7 +14,7 @@ int main() {
 
     struct hostent *host = gethostbyname(url);
     if (host == NULL) {
-        printf("❌ Could not resolve the domain\n");
+        printf("Could not resolve the domain\n");
         return 1;
     }
 
