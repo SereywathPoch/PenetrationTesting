@@ -1,4 +1,6 @@
-import hashlib, os, base64
+import hashlib
+import os
+import base64
 
 def hash_password(password, salt=None):
     if not salt:

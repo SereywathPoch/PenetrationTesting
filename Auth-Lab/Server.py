@@ -10,13 +10,13 @@ def login():
     msg = ""
 
     if request.method == "POST":
-        user = request.form["username"]
-        pwd = request.form["password"]
+        username = request.form["username"]
+        password = request.form["password"]
         ip = request.remote_addr
 
-        # Detect injection attempts
-        if is_attack(user) or is_attack(pwd):
-            log_attack(ip, f"{user} | {pwd}")
+        # Detect SQL Injection
+        if is_attack(username) or is_attack(password):
+            log_attack(ip, f"{username} | {password}")
             return "ATTACK DETECTED & LOGGED"
 
         conn = sqlite3.connect("users.db")
@@ -24,7 +24,7 @@ def login():
 
         c.execute(
             "SELECT password_hash, salt, attempts FROM users WHERE username = ?",
-            (user,)
+            (username,)
         )
 
         result = c.fetchone()
@@ -36,11 +36,17 @@ def login():
 
             if attempts >= 3:
                 msg = "Account locked"
-            elif verify_password(stored_hash, salt, pwd):
-                c.execute("UPDATE users SET attempts = 0 WHERE username = ?", (user,))
+            elif verify_password(stored_hash, salt, password):
+                c.execute(
+                    "UPDATE users SET attempts = 0 WHERE username = ?",
+                    (username,)
+                )
                 msg = "LOGIN SUCCESS"
             else:
-                c.execute("UPDATE users SET attempts = attempts + 1 WHERE username = ?", (user,))
+                c.execute(
+                    "UPDATE users SET attempts = attempts + 1 WHERE username = ?",
+                    (username,)
+                )
                 msg = "Wrong password"
 
         conn.commit()

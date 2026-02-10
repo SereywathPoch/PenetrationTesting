@@ -7,7 +7,7 @@ def init_db():
 
     c.execute("""
     CREATE TABLE IF NOT EXISTS users (
-        id INTEGER PRIMARY KEY,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         username TEXT UNIQUE,
         password_hash TEXT,
         salt TEXT,
@@ -18,7 +18,7 @@ def init_db():
     try:
         creds = hash_password("admin123")
         c.execute(
-            "INSERT INTO users VALUES (NULL, ?, ?, ?, 0)",
+            "INSERT INTO users (username, password_hash, salt) VALUES (?, ?, ?)",
             ("admin", creds["hash"], creds["salt"])
         )
     except:
@@ -29,4 +29,4 @@ def init_db():
 
 if __name__ == "__main__":
     init_db()
-    print("Secure database ready")
+    print("Database initialized")
