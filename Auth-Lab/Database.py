@@ -1,4 +1,5 @@
 import sqlite3
+from Hash import hash_password
 
 def init_db():
     conn = sqlite3.connect("users.db")
@@ -6,18 +7,26 @@ def init_db():
 
     c.execute("""
     CREATE TABLE IF NOT EXISTS users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        username TEXT,
-        password TEXT
+        id INTEGER PRIMARY KEY,
+        username TEXT UNIQUE,
+        password_hash TEXT,
+        salt TEXT,
+        attempts INTEGER DEFAULT 0
     )
     """)
 
-    # Test user
-    c.execute("INSERT OR IGNORE INTO users (username, password) VALUES ('admin', 'admin123')")
+    try:
+        creds = hash_password("admin123")
+        c.execute(
+            "INSERT INTO users VALUES (NULL, ?, ?, ?, 0)",
+            ("admin", creds["hash"], creds["salt"])
+        )
+    except:
+        pass
 
     conn.commit()
     conn.close()
 
 if __name__ == "__main__":
     init_db()
-    print("Database ready")
+    print("Secure database ready")
