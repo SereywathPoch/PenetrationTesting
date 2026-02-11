@@ -22,7 +22,7 @@ def host_scan(target):
 # PORT SCAN
 # -------------------------
 def port_scan(target):
-    print("\n🔍 Port Scan (Web-related ports)")
+    print("\nPort Scan (Web-related ports)")
     ports = [80, 443, 5000, 8000, 8080]
 
     for port in ports:
