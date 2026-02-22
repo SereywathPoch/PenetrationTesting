@@ -34,3 +34,5 @@ function ask() {
 }
 
 ask();
+
+// How to run: node PacketSniffer.js

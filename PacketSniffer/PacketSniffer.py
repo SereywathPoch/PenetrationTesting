@@ -30,3 +30,5 @@ def stop_sniffer(signal_received, frame):
 signal.signal(signal.SIGINT, stop_sniffer)
 
 sniff(filter="ip", prn=handle_packet, store=False)
+
+# How to run: python PacketSniffer.py

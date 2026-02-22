@@ -50,3 +50,5 @@ int main() {
 
     return 0;
 }
+
+// How to run: gcc PacketSniffer.c -o PacketSniffer ./PacketSniffer  
