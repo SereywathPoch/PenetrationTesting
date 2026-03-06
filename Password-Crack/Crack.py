@@ -1,6 +1,6 @@
 # Cracker.py
-import json
-import time
+import json  # Using the json library for database handling
+import time # Using the time library to measure the duration of the attack
 from Hash import verify_password
 
 DB_FILE = "users.json"
